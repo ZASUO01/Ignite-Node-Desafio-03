@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "tsx watch src/server.ts",
     "build": "tsup src --out-dir build",
-    "start": "node build/server.js"
+    "start": "node build/server.js",
+    "test:unit": "vitest run --dir src/use-cases",
+    "test:unit:watch": "vitest --dir src/use-cases"
   },
   "keywords": [],
   "author": "",
@@ -14,17 +16,20 @@
   "dependencies": {
     "@prisma/client": "5.7.0",
     "@rocketseat/eslint-config": "2.1.0",
+    "bcryptjs": "2.4.3",
     "dotenv": "^16.3.1",
     "fastify": "^4.25.1",
     "zod": "^3.22.4"
   },
   "devDependencies": {
+    "@types/bcryptjs": "2.4.6",
     "@types/node": "^20.10.5",
     "eslint": "8.56.0",
     "prisma": "5.7.0",
     "tsup": "^8.0.1",
     "tsx": "^4.6.2",
     "typescript": "^5.3.3",
-    "vite-tsconfig-paths": "^4.2.2"
+    "vite-tsconfig-paths": "^4.2.2",
+    "vitest": "1.0.4"
   }
 }
