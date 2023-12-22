@@ -1,5 +1,5 @@
 import { Pet, Prisma } from '@prisma/client'
-import { PetsRepository, PetDetails } from '../pets-repository'
+import { PetsRepository, PetFilter } from '../pets-repository'
 import { randomUUID } from 'node:crypto'
 
 export class InMemoryPetsRepository implements PetsRepository {
@@ -15,22 +15,18 @@ export class InMemoryPetsRepository implements PetsRepository {
     return pet
   }
 
-  async fetchByOrgId(orgId: string) {
-    const pets = this.Items.filter((item) => item.org_id === orgId)
-
-    return pets
-  }
-
-  async searchMany(data: PetDetails) {
+  async searchMany(orgId: string, filter: PetFilter) {
     let pets: Pet[] = this.Items
 
-    pets = data.age ? pets.filter((item) => item.age === data.age) : pets
-    pets = data.energy
-      ? pets.filter((item) => item.energy === data.energy)
+    pets = pets.filter((item) => item.org_id === orgId)
+
+    pets = filter.age ? pets.filter((item) => item.age === filter.age) : pets
+    pets = filter.energy
+      ? pets.filter((item) => item.energy === filter.energy)
       : pets
-    pets = data.size ? pets.filter((item) => item.size === data.size) : pets
-    pets = data.independency
-      ? pets.filter((item) => item.independency === data.independency)
+    pets = filter.size ? pets.filter((item) => item.size === filter.size) : pets
+    pets = filter.independency
+      ? pets.filter((item) => item.independency === filter.independency)
       : pets
 
     return pets
