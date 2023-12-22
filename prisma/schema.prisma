@@ -40,11 +40,11 @@ model Pet {
 }
 
 model Org {
-  id            String  @id @default(uuid())
-  responsible   String?
-  email         String?
+  id            String @id @default(uuid())
+  responsible   String
+  email         String @unique
   password_hash String
-  cep           String  @unique
+  cep           String
   address       String
   phone         String
   title         String

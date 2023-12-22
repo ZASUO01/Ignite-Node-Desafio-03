@@ -4,8 +4,8 @@ import { hash } from 'bcryptjs'
 import { DuplicatedResourceError } from './errors/duplicated-resource-error'
 
 interface CreateOrgsUseCaseRequest {
-  responsible?: string
-  email?: string
+  responsible: string
+  email: string
   password: string
   cep: string
   address: string
@@ -31,9 +31,9 @@ export class CreateOrgUseCase {
   }: CreateOrgsUseCaseRequest): Promise<CreateOrgsUseCaseResponse> {
     const passwordHash = await hash(password, 6)
 
-    const orgWithSameCep = await this.orgsRepository.findByCep(cep)
+    const orgWithSameEmail = await this.orgsRepository.findByEmail(email)
 
-    if (orgWithSameCep) {
+    if (orgWithSameEmail) {
       throw new DuplicatedResourceError()
     }
 

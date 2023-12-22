@@ -13,8 +13,8 @@ export class InMemoryOrgsRepository implements OrgsRepository {
     return orgs
   }
 
-  async findByCep(cep: string) {
-    const org = this.items.find((item) => item.cep === cep)
+  async findByEmail(email: string) {
+    const org = this.items.find((item) => item.email === email)
 
     if (!org) {
       return null
